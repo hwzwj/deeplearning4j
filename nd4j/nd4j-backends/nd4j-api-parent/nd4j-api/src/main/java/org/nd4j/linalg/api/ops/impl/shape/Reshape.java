@@ -51,13 +51,13 @@ public class Reshape extends DynamicCustomOp {
     public Reshape(SameDiff sameDiff, SDVariable i_v, long[] shape) {
         super(null, sameDiff, new SDVariable[]{i_v});
         this.shape = shape;
-        addIArgument('c');
+        addIArgument(-'c'); //Reshape op is a special case: takes negative values to signify (optional) order arg (to avoid confusion with shape values)
         addIArgument(shape);
     }
 
     public Reshape(SameDiff sameDiff, SDVariable i_v, SDVariable shape) {
         super(null, sameDiff, new SDVariable[]{i_v, shape});
-        addIArgument('c');
+        addIArgument(-'c'); //Reshape op is a special case: takes negative values to signify (optional) order arg (to avoid confusion with shape values)
     }
 
     public Reshape(INDArray in, INDArray shape, INDArray out){
